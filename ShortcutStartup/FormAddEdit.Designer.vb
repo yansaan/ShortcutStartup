@@ -31,6 +31,7 @@ Partial Class FormAdd
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.ListBox2 = New System.Windows.Forms.ListBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
         '
         'ListBox1
@@ -109,6 +110,10 @@ Partial Class FormAdd
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "Label3"
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'FormAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -141,4 +146,5 @@ Partial Class FormAdd
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents ListBox2 As ListBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
 End Class

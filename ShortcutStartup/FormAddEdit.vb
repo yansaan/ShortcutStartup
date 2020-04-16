@@ -46,15 +46,33 @@ Public Class FormAdd
   Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
     Select Case ListBox1.SelectedItem
       Case "Custom..."
-        MsgBox("ok")
+        OpenFileDialog1.Filter = "EXE Program|*.exe"
+        OpenFileDialog1.Title = "Search custom program..."
+        OpenFileDialog1.FileName = ""
+
+        If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+          Dim filename = OpenFileDialog1.FileName
+          TextBox1.Text = Path.GetFileNameWithoutExtension(filename)
+          TextBox2.Text = filename
+          Label3.Text = ""
+          Button1.Enabled = True
+        End If
       Case Else
         For Each p In Process.GetProcesses
           Try
             If p.MainWindowTitle = ListBox1.SelectedItem.ToString Then
-              TextBox1.Text = p.ProcessName
-              TextBox2.Text = p.Modules(0).FileName.ToString
-              Label3.Text = ""
-              Button1.Enabled = True
+              Select Case p.Modules(0).FileName.ToString
+                Case "C:\WINDOWS\system32\ApplicationFrameHost.exe"
+                  TextBox1.Text = p.MainWindowTitle
+                  TextBox2.Text = ""
+                  Label3.Text = p.MainWindowTitle & " is invalid program"
+                  Button1.Enabled = False
+                Case Else
+                  TextBox1.Text = p.ProcessName
+                  TextBox2.Text = p.Modules(0).FileName.ToString
+                  Label3.Text = ""
+                  Button1.Enabled = True
+              End Select
             End If
           Catch ex As Exception
             TextBox2.Text = ""
